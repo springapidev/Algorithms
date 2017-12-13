@@ -1,4 +1,4 @@
-package com.coderbd.IterativeImpl;
+package com.coderbd.binarySearch;
 
 /**
  *
