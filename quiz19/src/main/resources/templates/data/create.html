@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout2.html}">
+
+<head>
+    <title>Data Create</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="row">
+
+
+        <div class="col-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add New Data</h4>
+
+                    <form class="forms-sample" action="#" th:object="${obj}" method="post">
+                        <div class="form-group row">
+                            <label for="type" class="col-sm-3 col-form-label">Type</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="type"
+                                       placeholder="Enter Type">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ip" class="col-sm-3 col-form-label">Ip</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="ip"
+                                       placeholder="Enter Ip">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mac" class="col-sm-3 col-form-label">Mac</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="mac"
+                                       placeholder="Enter Mac">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ignore" class="col-sm-3 col-form-label">Ignore</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="ignore"
+                                       placeholder="Enter Ignore">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="community" class="col-sm-3 col-form-label">Community</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="community"
+                                       placeholder="Enter Community">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-3 col-form-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="name"
+                                       placeholder="Enter Name">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success mr-2 float-right">Submit</button>
+                        <button type="submit" class="btn btn-light mr-2 float-right">Reset</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>
