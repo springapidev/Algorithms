@@ -19,18 +19,22 @@
                     <th>Option C</th>
                     <th>Option D</th>
                     <th>Answer</th>
+                    <th>Type</th>
+                    <th>Level</th>
                     <th>Explanation</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="data : ${list}">
-                    <td th:text="${data.getTitle()}">Type</td>
-                    <td th:text="${data.getOptionA()}">Version</td>
-                    <td th:text="${data.getOptionB()}">Version</td>
-                    <td th:text="${data.getOptionC()}">Version</td>
-                    <td th:text="${data.getOptionD()}">Version</td>
-                    <td th:text="${data.getAnswer()}">Version</td>
+                    <td th:text="${data.getTitle()}">Title</td>
+                    <td th:text="${data.getOptionA()}">Option A</td>
+                    <td th:text="${data.getOptionB()}">Option B</td>
+                    <td th:text="${data.getOptionC()}">Option C</td>
+                    <td th:text="${data.getOptionD()}">Option D</td>
+                    <td th:text="${data.getAnswer()}">Answer</td>
+                    <td th:text="${data.getQuestionStatus().name()}">Type</td>
+                    <td th:text="${data.getLevel().getName()}">Type</td>
                     <td th:text="${data.getExplanation()}">Explanation</td>
                 </tr>
 

@@ -9,8 +9,10 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "title", length = 10000)
     private String title;
 
+    @Column(name = "explanation", length = 20000)
     private String explanation;
 
     private String optionA;
@@ -97,5 +99,29 @@ public class Question {
 
     public void setLevel(Level level) {
         this.level = level;
+    }
+
+    public QuestionStatus getQuestionStatus() {
+        return questionStatus;
+    }
+
+    public void setQuestionStatus(QuestionStatus questionStatus) {
+        this.questionStatus = questionStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", explanation='" + explanation + '\'' +
+                ", optionA='" + optionA + '\'' +
+                ", optionB='" + optionB + '\'' +
+                ", optionC='" + optionC + '\'' +
+                ", optionD='" + optionD + '\'' +
+                ", answer='" + answer + '\'' +
+                ", questionStatus=" + questionStatus +
+                ", level=" + level +
+                '}';
     }
 }

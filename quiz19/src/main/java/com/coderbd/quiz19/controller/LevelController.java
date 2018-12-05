@@ -50,6 +50,7 @@ public class LevelController {
                 modelAndView.addObject("successMessage", "Insert Success");
             }
             modelAndView.addObject("obj", new Level());
+            modelAndView.addObject("catlist", categoryRepo.findAll());
             modelAndView.setViewName("level/create");
         return modelAndView;
     }

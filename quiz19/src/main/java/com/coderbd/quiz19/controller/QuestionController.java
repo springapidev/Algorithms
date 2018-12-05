@@ -1,18 +1,24 @@
 package com.coderbd.quiz19.controller;
 
 
+import com.coderbd.quiz19.entity.Category;
+import com.coderbd.quiz19.entity.Level;
 import com.coderbd.quiz19.entity.Question;
+import com.coderbd.quiz19.entity.QuestionStatus;
+import com.coderbd.quiz19.repo.CategoryRepo;
+import com.coderbd.quiz19.repo.LevelRepo;
 import com.coderbd.quiz19.repo.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -21,17 +27,33 @@ import java.util.Optional;
 public class QuestionController {
     @Autowired
     private QuestionRepo repo;
+    @Autowired
+    private LevelRepo levelRepo;
+//@RequestParam("cateID") String categoryID,@RequestParam("levID") String levelID,@RequestParam("typ") String qtype
+    @Autowired
+    private CategoryRepo categoryRepo;
 
     @RequestMapping(value = "create.do", method = RequestMethod.GET)
     public ModelAndView getView() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("obj", new Question());
+        modelAndView.addObject("catlist", categoryRepo.findAll());
+//        Category category=new Category();
+//        category.setId(Long.parseLong(categoryID));
+//        if(category.getId() != null ){
+//            modelAndView.addObject("levList", levelRepo.findAllByCategory(category));
+//        }
+
+        modelAndView.addObject("types", QuestionStatus.values());
         modelAndView.setViewName("questions/create");
         return modelAndView;
     }
 
     @RequestMapping(value = "create.do", method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(@Valid Question obj, BindingResult bindingResult) {
+    public ModelAndView saveOrUpdate(@Valid Question obj, BindingResult bindingResult,@RequestParam("cateID") String categoryID,@RequestParam("typ") String qtype) {
+        System.out.println(obj);
+        System.out.println("categoryID: "+categoryID);
+        System.out.println("qtype: "+qtype);
         ModelAndView modelAndView=new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("questions/create");
@@ -40,6 +62,8 @@ public class QuestionController {
                 modelAndView.addObject("successMessage", "Insert Success");
             }
             modelAndView.addObject("obj", new Question());
+        modelAndView.addObject("catlist", categoryRepo.findAll());
+        modelAndView.addObject("levList", levelRepo.findAll());
             modelAndView.setViewName("questions/create");
         return modelAndView;
     }
@@ -65,4 +89,24 @@ public class QuestionController {
         modelAndView.setViewName("questions/list");
         return modelAndView;
     }
+
+
+    @PostMapping("/getLevels")
+    public @ResponseBody
+    Map<String, String> getCategoryLevelValues(@RequestParam("catID") String  categoryID) {
+        Map<String, String> levelValues = new HashMap<>();
+
+        Category category=new Category();
+        category.setId(Long.parseLong(categoryID));
+
+         List<Level> list=levelRepo.findAllByCategory(category);
+
+
+        for(Level level : list){
+            levelValues.put(String.valueOf(level.getId()), level.getName());
+        }
+
+        return levelValues;
+    }
+
 }

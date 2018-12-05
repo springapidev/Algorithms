@@ -9,54 +9,103 @@
 <body>
 <div layout:fragment="custom-content">
     <div class="row">
-
+        <div class="col-12 stretch-card">
+            <span th:utext="${successMessage}"></span>
+        </div>
 
         <div class="col-12 stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Add New Question</h4>
 
-                    <form class="forms-sample" action="#" th:object="${obj}" method="post">
+                    <form class="forms-sample"  th:object="${obj}"  th:action="@{/ques/create.do}"  method="post">
+
                         <div class="form-group row">
                             <label for="category" class="col-sm-3 col-form-label">Category</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" id="category"
-                                       placeholder="Enter category">
+                                <select id="category" th:name="cateID">
+                                  <span th:each="cat : ${catlist}">
+                                      <option th:value="${cat.getId()}"><span
+                                              th:text="${cat.getName()}"></span></option>
+                                      </span>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ip" class="col-sm-3 col-form-label">Level</label>
+                            <label for="category" class="col-sm-3 col-form-label">Level</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" id="ip"
-                                       placeholder="Enter Ip">
+                                <select id="level" th:name="levID">
+                                  <span th:each="lev : ${levList}">
+                                      <option th:value="${lev.getId()}"><span
+                                              th:text="${lev.getName()}"></span></option>
+                                      </span>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="question" class="col-sm-3 col-form-label">Question</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="question" th:name="*{title}"   th:field="*{title}"
+                                       placeholder="Enter Question">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="mac" class="col-sm-3 col-form-label">Title</label>
-                            <div class="col-sm-9">
-                                <input type="password" class="form-control" id="mac"
-                                       placeholder="Enter Mac">
+                            <label for="category" class="col-sm-3 col-form-label">Type</label>
+                            <div class="col-sm-9" >
+                                <div class="custom-control custom-radio custom-control-inline" th:each="ty : ${types}">
+                               <input type="radio" th:value="${ty}" th:name="typ">
+                                <label class="custom-control-label" th:for="${ty.name()}" th:text="${ty.name()}"></label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="ignore" class="col-sm-3 col-form-label">Ignore</label>
+                            <label for="optionA" class="col-sm-3 col-form-label">Option A</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" id="ignore"
-                                       placeholder="Enter Ignore">
+                                <input type="text" class="form-control" id="optionA" th:name="*{optionA}"  th:field="*{optionA}"
+                                       placeholder="Enter option A">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="optionB" class="col-sm-3 col-form-label">Option B</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="optionB" th:name="*{optionB}"  th:field="*{optionB}"
+                                       placeholder="Enter option A">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="community" class="col-sm-3 col-form-label">Community</label>
+                            <label for="optionC" class="col-sm-3 col-form-label">Option B</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" id="community"
-                                       placeholder="Enter Community">
+                                <input type="text" class="form-control" id="optionC" th:name="*{optionC}"  th:field="*{optionC}"
+                                       placeholder="Enter option A">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label">Name</label>
+                            <label for="optionD" class="col-sm-3 col-form-label">Option D</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" id="name"
-                                       placeholder="Enter Name">
+                                <input type="text" class="form-control" id="optionD" th:name="*{optionD}"  th:field="*{optionD}"
+                                       placeholder="Enter option A">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="category" class="col-sm-3 col-form-label">Answer</label>
+                            <div class="col-sm-9">
+                                <select id="answer" th:field="*{answer}">
+                                    <option th:value="optionA">optionA</option>
+                                    <option th:value="optionB">optionB</option>
+                                    <option th:value="optionC">optionC</option>
+                                    <option th:value="optionD">optionD</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="explanation" class="col-sm-3 col-form-label">Explanation</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="explanation" th:name="*{explanation}"
+                                       placeholder="Enter option A">
                             </div>
                         </div>
 
@@ -71,6 +120,11 @@
 
     </div>
 </div>
-
+<script type="text/javascript">
+    $("#level").remoteChained({
+        parents: "#category",
+        url: [[@{/ques/create.do}]]
+    });
+</script>
 </body>
 </html>
