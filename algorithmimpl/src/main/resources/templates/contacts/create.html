@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout2.html}">
+
+<head>
+    <title>Contact Create</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="row">
+        <div class="col-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add New Contact</h4>
+
+                    <form class="forms-sample" th:object="${obj}" method="post" th:action="@{/contact/create.do}">
+                        <div class="form-group row">
+                            <label for="companyID" class="col-sm-3 col-form-label">Companies:</label>
+                            <div class="col-sm-9">
+                                    <select th:field="*{departmentID.companyID.companyID}" name="companyID" id="companyID"  class="form-control" >
+                                        <option  th:each="company : ${companyList}" th:value="${company.getCompanyID()}" th:text="${company.companyName}"></option>
+                                    </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="depId" class="col-sm-3 col-form-label">Companies:</label>
+                            <div class="col-sm-9">
+
+                                <select id="depId"  class="form-control" th:field="*{departmentID.departmentID}">
+                                    <option  th:each="dep : ${departmentList}" th:value="${dep.departmentID}" th:text="${dep.departmentName}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="form-group row">
+                            <label for="contactName" class="col-sm-3 col-form-label">Contact Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="contactName" th:field="*{contactName}" required
+                                       placeholder="Enter Contact Name">
+                               </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="contactEmail" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="contactEmail" th:field="*{contactEmail}" required
+                                       placeholder="Enter Contact Email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="contactPhone" class="col-sm-3 col-form-label">Phone</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="contactPhone" th:field="*{contactPhone}" required
+                                       placeholder="Enter contactPhone">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success mr-2 float-right">Next</button>
+                        <button type="submit" class="btn btn-light mr-2 float-right">Reset</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Department</th>
+                    <th>Contact Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="data : ${list}">
+                    <td th:text="${data.getDepartmentID().getCompanyID().getCompanyName()}">Company</td>
+                    <td th:text="${data.getDepartmentID().getDepartmentName()}">Company</td>
+                    <td th:text="${data.getContactName()}">Company</td>
+                    <td th:text="${data.getContactPhone()}">Company</td>
+                    <td th:text="${data.getContactEmail()}">Company</td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <table cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td class="gutter">
+                        <div class="line number1 index0 alt2" style="display: none;">1</div>
+                    </td>
+                    <td class="code">
+                        <div class="container" style="display: none;">
+                            <div class="line number1 index0 alt2" style="display: none;">&nbsp;</div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

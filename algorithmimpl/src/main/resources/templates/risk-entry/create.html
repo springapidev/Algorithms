@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout2.html}">
+
+<head>
+    <title>Risk Create</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="row">
+
+
+        <div class="col-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add New Risk</h4>
+
+                    <form class="forms-sample" th:object="${obj}" method="post" th:action="@{/riskentry/create.do}">
+                        <div class="form-group row">
+                            <label for="cSFEntryID" class="col-sm-3 col-form-label">Arms Type:</label>
+                            <div class="col-sm-9">
+
+                                    <select th:field="*{aRMSTypeID}" id="cSFEntryID"  class="form-control" >
+                                        <option  th:each="arms : ${armstypelist}" th:value="${arms.aRMSTypeID}" th:text="${arms.aRMSType}"></option>
+                                    </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="categoryTypeID" class="col-sm-3 col-form-label">CSF Entry ID:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{cSFEntryID}" id="categoryTypeID"  class="form-control" >
+                                    <option  th:each="csf : ${csfentryList}" th:value="${csf.getcSFEntryID()}" th:text="${csf.getcSFEntryID()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="riskImpactTypeID" class="col-sm-3 col-form-label">Contact Name:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{contactID}" id="riskImpactTypeID"  class="form-control" >
+                                    <option  th:each="con : ${contactsList}" th:value="${con.getContactID()}" th:text="${con.contactName}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="processtype" class="col-sm-3 col-form-label">Review Period:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{reviewPeriodID}" id="processtype"  class="form-control" >
+                                    <option  th:each="rev : ${reviewperiodsList}" th:value="${rev.getReviewPeriodID()}" th:text="${rev.getReviewPeriod()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="riskName" class="col-sm-3 col-form-label">Risk Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="riskName" th:field="*{riskName}" required
+                                       placeholder="Enter Risk Name">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="riskTreatment" class="col-sm-3 col-form-label">Risk Treatment</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="riskTreatment" th:field="*{riskTreatment}" required
+                                       placeholder="Enter Risk Treatment">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="implementationCost" class="col-sm-3 col-form-label">Implementation Cost</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="implementationCost" th:field="*{implementationCost}" required
+                                       placeholder="Enter Implementation Cost">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="startDate" class="col-sm-3 col-form-label">Start Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="startDate" th:value="${#dates.format(obj.startDate, 'yyyy-MM-dd')}" th:field="*{startDate}" required
+                                       placeholder="Enter Start Date 2018-12-14">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="expiryDate" class="col-sm-3 col-form-label">Expiry Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="expiryDate" th:value="${#dates.format(obj.expiryDate, 'yyyy-MM-dd')}" th:field="*{expiryDate}" required
+                                       placeholder="Enter Start Date 2018-12-14">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="reviewDate" class="col-sm-3 col-form-label">Review Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" class="form-control" id="reviewDate" th:value="${#dates.format(obj.expiryDate, 'yyyy-MM-dd')}" th:field="*{reviewDate}" required
+                                       placeholder="Enter Review Date 2018-12-14">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="attachRiskTreatmentPlan" class="col-sm-3 col-form-label">Attach Risk Treatment Plan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="attachRiskTreatmentPlan" th:field="*{attachRiskTreatmentPlan}" required
+                                       placeholder="Enter Attach Risk Treatment Plan">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="riskAversion" class="col-sm-3 col-form-label">Risk Aversion</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="riskAversion"  th:field="*{riskAversion}" required
+                                       placeholder="Enter Risk Aversion">
+
+                            </div>
+                        </div>
+
+
+                        <button class="btn btn-success mr-2 float-right">Next</button>
+                        <button type="submit" class="btn btn-light mr-2 float-right">Reset</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>CSF Entry</th>
+                    <th>Category Type</th>
+                    <th>Contact Type</th>
+                    <th>Department Name</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="data : ${list}">
+                    <td th:text="${data.getCSFEntryID().getcSFEntryID()}">Department Name</td>
+                    <td th:text="${data.getCategoryTypeID().categoryType}">Company Name</td>
+                    <td th:text="${data.getContactID().contactName}">Contact Name</td>
+                    <td th:text="${data.getDepartmentID().departmentName}">Department Name</td>
+                    <td th:text="${data.getDepartmentID().getCompanyID().companyName}">Department Name</td>
+
+                </tr>
+
+                </tbody>
+            </table>
+
+            <table cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td class="gutter">
+                        <div class="line number1 index0 alt2" style="display: none;">1</div>
+                    </td>
+                    <td class="code">
+                        <div class="container" style="display: none;">
+                            <div class="line number1 index0 alt2" style="display: none;">&nbsp;</div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

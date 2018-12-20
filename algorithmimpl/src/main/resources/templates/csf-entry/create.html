@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout2.html}">
+
+<head>
+    <title>CSF Create</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="row">
+
+
+        <div class="col-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add New CSF</h4>
+
+                    <form class="forms-sample" th:object="${obj}" method="post" th:action="@{/csfentry/create.do}">
+                        <div class="form-group row">
+                            <label for="csftype" class="col-sm-3 col-form-label">Csf Type:</label>
+                            <div class="col-sm-9">
+
+                                    <select th:field="*{cSFTypeID}" id="csftype"  class="form-control" >
+                                        <option  th:each="csftype : ${csftypelist}" th:value="${csftype.getcSFTypeID()}" th:text="${csftype.getCSFType()}"></option>
+                                    </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="impacttype" class="col-sm-3 col-form-label">Impact Type:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{impactTypeID}" id="impacttype"  class="form-control" >
+                                    <option  th:each="impacttype : ${impacttypelist}" th:value="${impacttype.getImpactTypeID()}" th:text="${impacttype.getImpact()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="riskImpactTypeID" class="col-sm-3 col-form-label">Risk Impact Type:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{riskImpactTypeID}" id="riskImpactTypeID"  class="form-control" >
+                                    <option  th:each="impacttype : ${impacttypelist}" th:value="${impacttype.getImpactTypeID()}" th:text="${impacttype.getImpact()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lifecyc" class="col-sm-3 col-form-label">Life Cycle:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{lifeCycleID}" id="lifecyc"  class="form-control" >
+                                    <option  th:each="lifecyc : ${lifecycleslist}" th:value="${lifecyc.getLifeCycleID()}" th:text="${lifecyc.getLifeCycle()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="processtype" class="col-sm-3 col-form-label">Companies:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{processTypeID}" id="processtype"  class="form-control" >
+                                    <option  th:each="processtype : ${processtypelist}" th:value="${processtype.getProcessTypeID()}" th:text="${processtype.getProcessType()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="servicet" class="col-sm-3 col-form-label">Companies:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{serviceTypeID}" id="servicet"  class="form-control" >
+                                    <option  th:each="servicet : ${servicetypelist}" th:value="${servicet.getServiceTypeID()}" th:text="${servicet.getServiceType()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="checkedID" class="col-sm-3 col-form-label">Companies:</label>
+                            <div class="col-sm-9">
+
+                                <select th:field="*{vBFEntryID}" id="checkedID"  class="form-control" >
+                                    <option  th:each="vbfentry : ${vbfentrylist}" th:value="${vbfentry.getvBFEntryID()}" th:text="${vbfentry.getMisson()}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <button class="btn btn-success mr-2 float-right">Next</button>
+                        <button type="submit" class="btn btn-light mr-2 float-right">Reset</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                <tr>
+                    <th>CSF Type</th>
+                    <th>Impact Type</th>
+                    <th>Risk Impact Type</th>
+                    <th>Lifecycle Type</th>
+                    <th>Process Type</th>
+                    <th>Service Type</th>
+                    <th>Vbf Entry</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="data : ${list}">
+                    <td th:text="${data.getCSFTypeID().getcSFTypeID()}">Department Name</td>
+                    <td th:text="${data.getImpactTypeID().getImpactTypeID()}">Company Name</td>
+                    <td th:text="${data.getImpactTypeID().getImpactTypeID()}">Company Name</td>
+                    <td th:text="${data.getLifeCycleID().getLifeCycleID()}">Owner</td>
+                    <td th:text="${data.getProcessTypeID().processTypeID}">Department Name</td>
+                    <td th:text="${data.getServiceTypeID().getServiceTypeID()}">Company Name</td>
+                    <td th:text="${data.getVBFEntryID().getvBFEntryID()}">Owner</td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <table cellspacing="0" cellpadding="0" border="0">
+                <tbody>
+                <tr>
+                    <td class="gutter">
+                        <div class="line number1 index0 alt2" style="display: none;">1</div>
+                    </td>
+                    <td class="code">
+                        <div class="container" style="display: none;">
+                            <div class="line number1 index0 alt2" style="display: none;">&nbsp;</div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
