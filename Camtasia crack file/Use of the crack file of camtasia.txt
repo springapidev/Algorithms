@@ -1,0 +1,9 @@
+1. First of all open c drive.
+2. Make every single hidden data and folder visible.
+3. Open ProgramData, Then techSmith and Then Camtasia Studio 18
+                   or
+       you can copy past into your File Broweser
+
+   C:\ProgramData\TechSmith\Camtasia Studio 18
+
+4. Then move or copy the crack file in this location I mean in this folder.
